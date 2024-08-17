@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://kebklbdma182"]
+
+[ext_resource type="Script" path="res://Scripts/Game/PlayerCtrl.gd" id="1_u0q0y"]
+[ext_resource type="Script" path="res://Scripts/Camera/PlayerCtrlSpringArm.gd" id="2_nukb3"]
+
+[node name="PlayerCtrl" type="Node3D"]
+script = ExtResource("1_u0q0y")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
+script = ExtResource("2_nukb3")
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)

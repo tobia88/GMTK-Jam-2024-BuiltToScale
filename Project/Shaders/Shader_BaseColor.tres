@@ -1,0 +1,30 @@
+[gd_resource type="VisualShader" load_steps=2 format=3 uid="uid://dqhrxv54qbcrb"]
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_2dwdo"]
+output_port_for_preview = 0
+parameter_name = "MainColor"
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_toon, specular_toon;
+
+uniform vec4 MainColor : source_color;
+
+
+
+void fragment() {
+// ColorParameter:2
+	vec4 n_out2p0 = MainColor;
+
+
+// Output:0
+	ALBEDO = vec3(n_out2p0.xyz);
+
+
+}
+"
+modes/diffuse = 3
+modes/specular = 1
+nodes/fragment/2/node = SubResource("VisualShaderNodeColorParameter_2dwdo")
+nodes/fragment/2/position = Vector2(-360, 240)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0)

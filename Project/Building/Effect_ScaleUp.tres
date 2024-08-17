@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="BuildingEffect" load_steps=2 format=3 uid="uid://dc2uh20vb56gr"]
+
+[ext_resource type="Script" path="res://Scripts/Building/Effects/BuildingEffect.gd" id="1_teaba"]
+
+[resource]
+script = ExtResource("1_teaba")
+apply_scale_ratio = Vector2(1.5, 1.5)
