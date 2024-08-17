@@ -20,9 +20,19 @@ config/icon="res://icon.svg"
 GameManager="*res://Scripts/Global/Manager/GameManager.gd"
 PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")
+enabled=PackedStringArray()
+
+[global_group]
+
+level=""
+character_start=""
 
 [input]
 

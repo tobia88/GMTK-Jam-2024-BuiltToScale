@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://ira5lh6pjpx8"]
+[gd_scene load_steps=12 format=3 uid="uid://ira5lh6pjpx8"]
 
 [ext_resource type="Shader" uid="uid://dqhrxv54qbcrb" path="res://Shaders/Shader_BaseColor.tres" id="1_35uou"]
+[ext_resource type="Script" path="res://Scripts/Game/Level.gd" id="1_se0p2"]
 [ext_resource type="PackedScene" uid="uid://bhap26c2aki1h" path="res://Building/Building.tscn" id="2_6g1ys"]
 [ext_resource type="PackedScene" uid="uid://doo26nt2yfwpb" path="res://TargetStructure/TargetStructure.tscn" id="3_e17sb"]
+[ext_resource type="PackedScene" uid="uid://dx5vngxya1wbv" path="res://Misc/Misc_CharacterStart.tscn" id="5_oyw5a"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_frvrd"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -27,7 +29,8 @@ shader_parameter/MainColor = Color(0.28251, 0.43, 0.2193, 1)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ftn70"]
 data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
-[node name="Level_0" type="Node3D"]
+[node name="Level_0" type="Node3D" groups=["level"]]
+script = ExtResource("1_se0p2")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_4cw08")
@@ -62,3 +65,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.09567, 9.53674e-07, -8.4145
 
 [node name="TargetStructure" parent="." instance=ExtResource("3_e17sb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9624, 3.14901, -17.7454)
+
+[node name="MiscCharacterStart" parent="." instance=ExtResource("5_oyw5a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.692018, 0.0266705, 4.83468)

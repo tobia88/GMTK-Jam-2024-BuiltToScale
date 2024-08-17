@@ -15,24 +15,20 @@ func _ready() -> void:
 	spring_length = camera.position.z
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	target_offset = position
-	
+
 	top_level = true
-	
-	
+
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		mouse_input_vel = -event.relative
 
 
 func _process(delta: float) -> void:
-	_handle_mouse_input()
 	_update_camera_rotation(delta)
 	_update_camera_position(delta)
 
-func _handle_mouse_input() -> void:
-	pass
-	
-	
+
 func _update_camera_rotation(delta: float) -> void:
 	var add_yaw := deg_to_rad(mouse_input_vel.x) * yaw_sensitivity
 	var new_yaw := wrapf(rotation.y + add_yaw, 0.0, TAU)
@@ -45,9 +41,11 @@ func _update_camera_rotation(delta: float) -> void:
 	quaternion = quaternion.slerp(target_quat, 1.0 - exp(-rot_smooth_spd * delta ))
 
 	mouse_input_vel = Vector2.ZERO
-	
+
+
 func _exp_lerp(from: Variant, to: Variant, delta: float, decay: float = 5.0 ) -> float:
 	return to + (to - from) * exp(-decay * delta)
-	
+
+
 func _update_camera_position(delta: float) -> void:
 	global_position = target.transform * target_offset

@@ -1,23 +1,14 @@
 extends Node
 
-enum LevelStates {
-	NONE,
-	GAME_START,
-	PLAYING,
-	GAME_OVER,
-	ENDED
-}
+var _active_level: Level
+var active_level: Level:
+	get:
+		if not _active_level:
+			_active_level = get_tree().get_first_node_in_group("level")
+		return _active_level
+	set(value):
+		_active_level = active_level
 
-func on_character_enter_building(character: Character, building: Building) -> void:
-	print_debug("%s is entering %s" % [character.name, building.name])
-	building.is_activated = true
-	
-	character.scale_lvl += 1
-	character.launch_by_target_height(5.0)
-	
-func on_character_collide_structure(character: Character, structure: TargetStructure) -> void:
-	if character.scale_lvl < structure.required_scale_lvl:
-		character.dead()
-	else:
-		structure.dead()	
-	print_debug("%s is collide with %s" % [character.name, structure.name])
+func _ready() -> void:
+	if active_level:
+		active_level.level_state = Level.LevelState.GAME_START

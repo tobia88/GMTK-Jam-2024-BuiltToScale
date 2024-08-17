@@ -118,7 +118,7 @@ func process_collision() -> void:
 	for i in get_slide_collision_count():
 		var c := get_slide_collision(i).get_collider()
 		if c is TargetStructure:
-			GameManager.on_character_collide_structure(self, c as TargetStructure)
+			GameManager.active_level.on_character_collide_structure(self, c as TargetStructure)
 
 
 func cleanup_requests() -> void:

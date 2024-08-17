@@ -23,4 +23,4 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body is not Character:
 		return
 		
-	GameManager.on_character_enter_building(body as Character, self)
+	GameManager.active_level.on_character_enter_building(body as Character, self)
