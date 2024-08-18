@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://cr4fkj12c17b0"]
+
+[ext_resource type="Script" path="res://Scripts/Game/Level.gd" id="1_47nh7"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_frvrd"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_wuns4"]
+sky_material = SubResource("ProceduralSkyMaterial_frvrd")
+
+[sub_resource type="Environment" id="Environment_4cw08"]
+background_mode = 2
+sky = SubResource("Sky_wuns4")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Level_Base" type="Node3D" groups=["level"]]
+script = ExtResource("1_47nh7")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4cw08")
