@@ -67,4 +67,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.09567, 9.53674e-07, -8.4145
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9624, 3.14901, -17.7454)
 
 [node name="MiscCharacterStart" parent="." instance=ExtResource("5_oyw5a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.692018, 0.0266705, 4.83468)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.4544, 0.0266705, 9.46823)

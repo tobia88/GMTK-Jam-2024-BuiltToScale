@@ -33,6 +33,7 @@ enabled=PackedStringArray()
 
 level=""
 character_start=""
+target_structure=""
 
 [input]
 

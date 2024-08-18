@@ -6,7 +6,7 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wf26f"]
 
-[node name="TargetStructure" type="RigidBody3D"]
+[node name="TargetStructure" type="RigidBody3D" groups=["target_structure"]]
 script = ExtResource("1_am54d")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

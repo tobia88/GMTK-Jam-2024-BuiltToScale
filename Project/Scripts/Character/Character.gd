@@ -13,6 +13,8 @@ class JumpRequest:
 
 const move_speed := 25.0
 const jump_height := 2.0
+const power_jump_height_multiplier := 2.0
+
 @export var gravity_scale := 10.0
 
 var input_dir := Vector2.ZERO
@@ -25,7 +27,9 @@ var scale_lvl: int:
 		_scale_lvl = value
 		update_scale()
 
-@onready var camera := %Camera3D
+var camera : Camera3D:
+	get:
+		return %Camera3D
 
 var jump_requests: Array[JumpRequest]
 
@@ -33,27 +37,46 @@ var is_launching := false
 var launch_request := 0.0
 
 var should_consume_lvl := false
+var should_jump := false
+var is_power_jump := false
 
 func get_merged_gravity() -> Vector3:
 	return get_gravity() * gravity_scale
 
 
 func _process(delta: float) -> void:
-	handle_input(delta)
-	process_movement(delta)
-	process_consume_lvl()
-	cleanup_requests()
+	_handle_input(delta)
+	_process_movement(delta)
+	_process_consume_lvl()
+	_cleanup_requests()
 
 
-func handle_input(delta: float) -> void:
+func _handle_input(delta: float) -> void:
 	input_dir = Input.get_vector("move_left", "move_right", "move_back", "move_forward")
+	_handle_jump_input()
 
-func process_movement(delta: float) -> void:
+
+func _handle_jump_input() -> void:
+	if not Input.is_action_just_pressed("jump"):
+		return
+
+	if is_on_floor():
+		should_jump = true
+		is_power_jump = false
+	else:
+		if scale_lvl <= 1:
+			return
+
+		should_jump = true
+		is_power_jump = true
+
+
+func _process_movement(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_merged_gravity() * delta
 
-	apply_external_forces()
+	_apply_external_forces()
 
 	var move_dir := Vector3.ZERO
 	if not input_dir.is_zero_approx():
@@ -65,27 +88,33 @@ func process_movement(delta: float) -> void:
 	velocity.z = move_dir.z * move_speed
 
 	if move_and_slide():
-		process_collision()
+		_process_collision()
 
 
-func process_consume_lvl() -> void:
-	if should_consume_lvl:
+func _process_consume_lvl() -> void:
+	if is_power_jump:
 		scale_lvl -= 1
 		update_scale()
-		should_consume_lvl = false
 
 
-func apply_external_forces() -> void:
+func _apply_external_forces() -> void:
 	if launch_request > 0.0:
 		velocity.y = compute_jump_height(launch_request)
 
 	elif Input.is_action_just_pressed("jump"):
-		var should_jump = is_on_floor() or scale_lvl > 1
-		should_consume_lvl = should_jump and !is_on_floor()
+		if is_on_floor():
+			should_jump = true
+			is_power_jump = false
+		else:
+			if scale_lvl > 1:
+				should_jump = true
+				is_power_jump = true
 
-		if should_jump:
-			var jump_velocity := compute_jump_height_by_lvl()
-			velocity.y = jump_velocity
+	if should_jump:
+		var multiplier: float = 1.0 if not is_power_jump else power_jump_height_multiplier
+		var target_jump_height: float = jump_height * multiplier
+		var jump_velocity := compute_jump_height(target_jump_height)
+		velocity.y = jump_velocity
 
 	launch_request = 0.0
 
@@ -114,16 +143,19 @@ func dead() -> void:
 	$MeshInstance3D.visible = false
 
 
-func process_collision() -> void:
+func _process_collision() -> void:
 	for i in get_slide_collision_count():
 		var c := get_slide_collision(i).get_collider()
 		if c is TargetStructure:
 			GameManager.active_level.on_character_collide_structure(self, c as TargetStructure)
 
 
-func cleanup_requests() -> void:
+func _cleanup_requests() -> void:
 	jump_requests.clear()
-	
+
+	should_jump = false
+	is_power_jump = false
+
 
 #func _physics_process(delta: float) -> void:
 	## Add the gravity.
