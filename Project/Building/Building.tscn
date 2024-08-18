@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Building/Building.gd" id="1_mbaa3"]
 [ext_resource type="Shader" uid="uid://dqhrxv54qbcrb" path="res://Shaders/Shader_BaseColor.tres" id="2_d5g81"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_gkedi"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_55kbm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ucr7v"]
 render_priority = 0
@@ -25,7 +25,7 @@ unique_name_in_owner = true
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-shape = SubResource("SphereShape3D_gkedi")
+shape = SubResource("SphereShape3D_55kbm")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true

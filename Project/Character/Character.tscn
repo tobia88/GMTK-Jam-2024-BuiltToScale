@@ -3,7 +3,8 @@
 [ext_resource type="Script" path="res://Scripts/Character/Character.gd" id="1_c3mco"]
 [ext_resource type="Script" path="res://Scripts/Camera/CameraSpringArm.gd" id="4_eit5j"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_an4rf"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_ul1pr"]
+size = Vector3(1, 2, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ylf6m"]
 
@@ -12,7 +13,7 @@ script = ExtResource("1_c3mco")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_an4rf")
+shape = SubResource("BoxShape3D_ul1pr")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

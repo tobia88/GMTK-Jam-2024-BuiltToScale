@@ -21,6 +21,11 @@ func _ready() -> void:
 	assert(parent_level)
 	parent_level.on_phase_state_changed.connect(_handle_on_phase_state_changed)
 	parent_level.on_level_state_changed.connect(_handle_on_level_state_changed)
+	
+	
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("ui_cancel"):
+		GameManager.quit_game()
 
 
 func spawn_character() -> Character:

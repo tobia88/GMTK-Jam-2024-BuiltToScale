@@ -11,7 +11,7 @@ class JumpRequest:
 		is_consuming_lvl = p_is_consuming_lvl
 
 
-const move_speed := 10.0
+const move_speed := 8.0
 const jump_height := 2.0
 const power_jump_height_multiplier := 2.5
 

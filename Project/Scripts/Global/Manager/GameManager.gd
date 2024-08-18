@@ -15,9 +15,13 @@ var active_level: Level:
 
 
 func _ready() -> void:
-	active_level.level_state = Level.LevelState.GAME_START
+	if active_level:
+		active_level.level_state = Level.LevelState.GAME_START
 
 func load_level(idx: int) -> Level:
 	var new_lvl = level_template_arr[idx].instantiate() as Level
 	assert(new_lvl)
 	return new_lvl
+
+func quit_game() -> void:
+	get_tree().quit()

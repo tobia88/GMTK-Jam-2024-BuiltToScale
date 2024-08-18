@@ -56,7 +56,7 @@ func on_character_enter_building(character: Character, building: Building) -> vo
 	building.is_activated = true
 
 	character.scale_lvl += 1
-	character.launch_by_target_height(5.0)
+	#character.launch_by_target_height(5.0)
 
 func on_character_collide_structure(character: Character, structure: TargetStructure) -> void:
 	if character.scale_lvl < structure.required_scale_lvl:
