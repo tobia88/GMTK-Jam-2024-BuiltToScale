@@ -11,11 +11,11 @@ class JumpRequest:
 		is_consuming_lvl = p_is_consuming_lvl
 
 
-const move_speed := 25.0
+const move_speed := 10.0
 const jump_height := 2.0
-const power_jump_height_multiplier := 2.0
+const power_jump_height_multiplier := 2.5
 
-@export var gravity_scale := 10.0
+@export var gravity_scale := 5.0
 
 var input_dir := Vector2.ZERO
 
@@ -40,6 +40,7 @@ var should_consume_lvl := false
 var should_jump := false
 var is_power_jump := false
 
+
 func get_merged_gravity() -> Vector3:
 	return get_gravity() * gravity_scale
 
@@ -49,6 +50,15 @@ func _process(delta: float) -> void:
 	_process_movement(delta)
 	_process_consume_lvl()
 	_cleanup_requests()
+	_debug_draw()
+
+
+func launch_by_target_height(target_height: float) -> void:
+	launch_request = target_height
+
+
+func dead() -> void:
+	$MeshInstance3D.visible = false
 
 
 func _handle_input(delta: float) -> void:
@@ -119,12 +129,6 @@ func _apply_external_forces() -> void:
 	launch_request = 0.0
 
 
-func compute_jump_height_by_lvl() -> float:
-	const base_jump_height := 2.0
-	var target_jump_height = base_jump_height * scale_lvl
-	return compute_jump_height(base_jump_height)
-
-
 func compute_jump_height(target_height: float) -> float:
 	return sqrt(2.0 * -get_merged_gravity().y * target_height)
 
@@ -132,15 +136,7 @@ func compute_jump_height(target_height: float) -> float:
 func update_scale() -> void:
 	# process scale
 	const scale_bonus_per_lvl := 0.5
-	scale = Vector3.ONE + Vector3.ONE * scale_lvl * scale_bonus_per_lvl
-
-
-func launch_by_target_height(target_height: float) -> void:
-	launch_request = target_height
-
-
-func dead() -> void:
-	$MeshInstance3D.visible = false
+	scale = Vector3.ONE + Vector3.ONE * (scale_lvl - 1) * scale_bonus_per_lvl
 
 
 func _process_collision() -> void:
@@ -157,21 +153,5 @@ func _cleanup_requests() -> void:
 	is_power_jump = false
 
 
-#func _physics_process(delta: float) -> void:
-	## Add the gravity.
-	#if not is_on_floor():
-		#velocity += get_gravity() * delta
-#
-	## Handle jump.
-	#if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		#velocity.y = JUMP_VELOCITY
-#
-	## Get the input direction and handle the movement/deceleration.
-	## As good practice, you should replace UI actions with custom gameplay actions.
-	#var direction := Input.get_axis("ui_left", "ui_right")
-	#if direction:
-		#velocity.x = direction * SPEED
-	#else:
-		#velocity.x = move_toward(velocity.x, 0, SPEED)
-#
-	#move_and_slide()
+func _debug_draw() -> void:
+	%DebugLabel3D.text = "Lvl=%d" % scale_lvl

@@ -25,7 +25,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _process(delta: float) -> void:
-	_update_camera_rotation(delta)
+	#_update_camera_rotation(delta)
 	_update_camera_position(delta)
 
 

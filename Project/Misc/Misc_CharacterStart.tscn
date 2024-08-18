@@ -1,8 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://dx5vngxya1wbv"]
+[gd_scene load_steps=4 format=3 uid="uid://dx5vngxya1wbv"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_lvaka"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_8ocmn"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2tv4m"]
 
 [node name="MiscCharacterStart" type="Node3D" groups=["character_start"]]
 
@@ -14,3 +16,9 @@ mesh = SubResource("CylinderMesh_lvaka")
 transform = Transform3D(1, 0, 0, 0, 0.713845, 0, 0, 0, 1, 0.505259, 1.61133, 0)
 mesh = SubResource("QuadMesh_8ocmn")
 skeleton = NodePath("../MeshInstance3D")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_2tv4m")

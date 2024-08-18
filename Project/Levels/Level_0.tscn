@@ -39,7 +39,7 @@ environment = SubResource("Environment_4cw08")
 transform = Transform3D(1, 0, 0, 0, 0.954975, 0.296685, 0, -0.296685, 0.954975, -2.30252, 11.2682, 15.4492)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 0, -0.5, 0)
+transform = Transform3D(13.4012, 0, 0, 0, 1, 0, 0, 0, 32.4215, 0, -0.5, 26.0639)
 material_override = SubResource("ShaderMaterial_xv7hj")
 mesh = SubResource("BoxMesh_eyj4p")
 skeleton = NodePath("")
@@ -49,8 +49,19 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_ftn70")
 
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(19.8774, 0, 0, 0, 1, 0, 0, 0, 27.0988, 0.0548744, -0.560265, -12.0482)
+material_override = SubResource("ShaderMaterial_xv7hj")
+mesh = SubResource("BoxMesh_eyj4p")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D3/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_ftn70")
+
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(16.527, 0.00067412, -0.00603053, -0.0037041, 3, 0.0141993, 0.00822156, -0.00351173, 12.129, 0.0949751, 1.64795, -19.0116)
+transform = Transform3D(16.527, 0.00067412, -0.00603053, -0.0037041, 3, 0.0141993, 0.00822156, -0.00351173, 12.129, 0.0664154, 1.66201, -19.0304)
 material_override = SubResource("ShaderMaterial_xv7hj")
 mesh = SubResource("BoxMesh_eyj4p")
 skeleton = NodePath("")
@@ -61,10 +72,13 @@ skeleton = NodePath("")
 shape = SubResource("ConcavePolygonShape3D_ftn70")
 
 [node name="Building" parent="." instance=ExtResource("2_6g1ys")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.09567, 9.53674e-07, -8.41459)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.09567, 9.53674e-07, 14.2109)
+
+[node name="Building2" parent="." instance=ExtResource("2_6g1ys")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.06901, 0.0351362, -7.22162)
 
 [node name="TargetStructure" parent="." instance=ExtResource("3_e17sb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9624, 3.14901, -17.7454)
 
 [node name="MiscCharacterStart" parent="." instance=ExtResource("5_oyw5a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.4544, 0.0266705, 9.46823)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0463924, 0.0266685, 26.1147)
