@@ -22,6 +22,11 @@ func load_level(idx: int) -> Level:
 	var new_lvl = level_template_arr[idx].instantiate() as Level
 	assert(new_lvl)
 	return new_lvl
+	
+
+func enter_next_level() -> void:
+	print_debug("Enter Next Level")
+	
 
 func quit_game() -> void:
 	get_tree().quit()

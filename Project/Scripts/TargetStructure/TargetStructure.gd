@@ -6,7 +6,8 @@ class_name TargetStructure
 
 func _process(delta: float) -> void:
 	# update label
-	$Label3D.text = "Lvl=%d" % required_scale_lvl
+	#$Label3D.text = "Lvl=%d" % required_scale_lvl
+	pass
 
 func dead() -> void:
 	queue_free()

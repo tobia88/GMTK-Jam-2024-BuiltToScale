@@ -51,6 +51,7 @@ func _process(delta: float) -> void:
 	_process_pending_states()
 	_process_pending_phases()
 
+	_process_level_state(delta)
 	_process_phase_state(delta)
 
 
@@ -91,6 +92,12 @@ func _process_pending_phases() -> void:
 			_enter_phase_state(new_state)
 
 
+func _process_level_state(delta: float) -> void:
+	if level_state == LevelState.LEVEL_CLEARED:
+		if Input.is_action_just_pressed("jump"):
+			GameManager.enter_next_level()
+
+
 func _process_phase_state(delta: float) -> void:
 	match(phase_state):
 		PhaseState.PLANNING: _on_process_planning_state(delta)
@@ -115,6 +122,7 @@ func _enter_level_state(new_state: LevelState) -> void:
 		LevelState.PLAYING: _on_enter_level_state_playing()
 		LevelState.LEVEL_CLEARED: _on_enter_level_state_level_cleared()
 
+	player_ctrl._update_ui()
 	on_level_state_changed.emit(_level_state)
 	print_debug("Enter Level State: %s" % str(LevelState.keys()[_level_state]))
 

@@ -3,16 +3,11 @@
 [ext_resource type="Script" path="res://Scripts/TargetStructure/TargetStructure.gd" id="1_am54d"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wf26f"]
-size = Vector3(0.462952, 0.63559, 0.383789)
+size = Vector3(0.503052, 0.832031, 0.61499)
 
-[node name="TargetStructure" type="AnimatableBody3D" groups=["target_structure"]]
+[node name="TargetStructure" type="StaticBody3D" groups=["target_structure"]]
 script = ExtResource("1_am54d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 1.5, 0)
 shape = SubResource("BoxShape3D_wf26f")
-
-[node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.54639, 0)
-text = "Lvl=10"
-font_size = 122
