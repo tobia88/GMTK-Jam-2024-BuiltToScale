@@ -20,3 +20,11 @@ script = ExtResource("1_47nh7")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_4cw08")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.354046, 0.935228, 0, -0.935228, 0.354046, -2.30252, 11.2682, 15.4492)
+light_color = Color(1, 0.999167, 0.95, 1)
+light_energy = 0.5
+shadow_enabled = true
+directional_shadow_split_3 = 0.474
+directional_shadow_blend_splits = true

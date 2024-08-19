@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3useup0mwcns"]
+
+[ext_resource type="MeshLibrary" uid="uid://c3ijsktjtkbga" path="res://Environment/MeshLib_BlockTiles.tres" id="1_yd1c0"]
+
+[node name="GridMap" type="GridMap"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+mesh_library = ExtResource("1_yd1c0")
+cell_size = Vector3(1, 1, 1)
+cell_center_y = false
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+metadata/_edit_group_ = true

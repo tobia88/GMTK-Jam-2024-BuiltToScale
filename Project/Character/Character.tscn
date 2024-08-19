@@ -1,12 +1,11 @@
 [gd_scene load_steps=5 format=3 uid="uid://husagdbw62l7"]
 
 [ext_resource type="Script" path="res://Scripts/Character/Character.gd" id="1_c3mco"]
+[ext_resource type="PackedScene" uid="uid://nnogmwxi85ku" path="res://Character/Mesh_Character.glb" id="2_osmc8"]
 [ext_resource type="Script" path="res://Scripts/Camera/CameraSpringArm.gd" id="4_eit5j"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ul1pr"]
 size = Vector3(1, 2, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_ylf6m"]
 
 [node name="Character" type="CharacterBody3D"]
 script = ExtResource("1_c3mco")
@@ -15,10 +14,7 @@ script = ExtResource("1_c3mco")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_ul1pr")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CapsuleMesh_ylf6m")
-skeleton = NodePath("../CollisionShape3D")
+[node name="Mesh_Character" parent="." instance=ExtResource("2_osmc8")]
 
 [node name="SpringArm3D" type="SpringArm3D" parent="."]
 unique_name_in_owner = true

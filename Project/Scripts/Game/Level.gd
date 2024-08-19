@@ -115,7 +115,7 @@ func _on_enter_level_state_game_start() -> void:
 
 
 func _on_enter_level_state_playing() -> void:
-	phase_state = PhaseState.PLANNING
+	phase_state = PhaseState.ROCK_AND_ROLL
 	
 	
 func _on_enter_level_state_level_cleared() -> void:

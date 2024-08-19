@@ -7,28 +7,13 @@
 
 [node name="Level_0" instance=ExtResource("1_th5nm")]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.354046, 0.935228, 0, -0.935228, 0.354046, -2.30252, 11.2682, 15.4492)
-light_color = Color(1, 0.999167, 0.95, 1)
-light_energy = 0.135
-shadow_enabled = true
-directional_shadow_split_3 = 0.474
-directional_shadow_blend_splits = true
-
-[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="." index="2"]
-transform = Transform3D(0.644858, -0.0725133, -0.760855, 0.545536, 0.74089, 0.391755, 0.535302, -0.6677, 0.517328, -2.30252, 11.2682, 15.4492)
-light_color = Color(1, 0.999167, 0.95, 1)
-light_energy = 0.63
-directional_shadow_split_3 = 0.474
-directional_shadow_blend_splits = true
-
-[node name="TargetStructure" parent="." index="3" instance=ExtResource("3_e17sb")]
+[node name="TargetStructure" parent="." index="2" instance=ExtResource("3_e17sb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4141, 1.01904, -8.07686)
 
-[node name="MiscCharacterStart" parent="." index="4" instance=ExtResource("5_oyw5a")]
+[node name="MiscCharacterStart" parent="." index="3" instance=ExtResource("5_oyw5a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0376205, 0.0138854, 26.1266)
 
-[node name="GridMap" type="GridMap" parent="." index="5"]
+[node name="GridMap" type="GridMap" parent="." index="4"]
 mesh_library = ExtResource("6_kbcmv")
 cell_size = Vector3(1, 1, 1)
 cell_center_y = false
