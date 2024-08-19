@@ -116,8 +116,6 @@ func _process_rotation(delta: float) -> void:
 	const rotate_smooth_spd := 10
 	quaternion = quaternion.slerp(target_quat, 1.0 - exp(-delta * rotate_smooth_spd))
 
-	DebugDraw3D.draw_arrow(global_position, global_position + global_basis.z * 20, Color.RED)
-
 
 func _process_consume_lvl() -> void:
 	if is_power_jump:
