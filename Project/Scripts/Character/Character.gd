@@ -17,6 +17,8 @@ const power_jump_height_multiplier := 2.5
 
 @export var gravity_scale := 5.0
 
+@onready var animation_tree := $AnimationTree
+
 var input_dir := Vector2.ZERO
 
 var _scale_lvl := 1
@@ -43,12 +45,24 @@ var is_power_jump := false
 var target_quat := Quaternion.IDENTITY
 @onready var mesh : Node3D = %Mesh
 
+class AnimParams:
+	var is_on_floor: bool = false
+	var is_falling: bool = false
+	var is_running: bool = false
+
+@onready var anim_params: AnimParams = AnimParams.new()
+
 
 func get_merged_gravity() -> Vector3:
 	return get_gravity() * gravity_scale
 
 
 func _process(delta: float) -> void:
+	_collect_animation_params(delta)
+	_update_animation_tree()
+
+
+func _physics_process(delta: float) -> void:
 	_handle_input(delta)
 	_process_movement(delta)
 	_process_rotation(delta)
@@ -63,6 +77,23 @@ func launch_by_target_height(target_height: float) -> void:
 
 func dead() -> void:
 	mesh.visible = false
+
+
+func _collect_animation_params(delta: float) -> void:
+	anim_params.is_on_floor = is_on_floor()
+	anim_params.is_falling = velocity.y < 0.0
+	anim_params.is_running = anim_params.is_on_floor and (Vector2(velocity.x, velocity.z).length() > 0)
+
+
+func _update_animation_tree() -> void:
+	animation_tree["parameters/StateMachine/conditions/is_on_air"] = !anim_params.is_on_floor
+	animation_tree["parameters/StateMachine/conditions/is_on_floor"] = anim_params.is_on_floor
+	
+	animation_tree["parameters/StateMachine/SM_Floor/conditions/is_idle"] = !anim_params.is_running
+	animation_tree["parameters/StateMachine/SM_Floor/conditions/is_running"] = anim_params.is_running
+	
+	animation_tree["parameters/StateMachine/SM_Air/conditions/is_falling"] = anim_params.is_falling
+	animation_tree["parameters/StateMachine/SM_Air/conditions/is_rising"] = !anim_params.is_falling
 
 
 func _handle_input(delta: float) -> void:

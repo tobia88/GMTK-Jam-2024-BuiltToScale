@@ -14,7 +14,8 @@ enum LevelState {
 enum PhaseState {
 	NONE,
 	PLANNING,
-	ROCK_AND_ROLL
+	ROCK_AND_ROLL,
+	FAILED_THIS_ROUND
 }
 
 var _level_state: LevelState = LevelState.NONE
@@ -126,3 +127,7 @@ func _enter_phase_state(new_state: PhaseState) -> void:
 	_phase_state = new_state
 	print_debug("Enter Phase State: %s" % str(PhaseState.keys()[_phase_state]))
 	on_phase_state_changed.emit(_phase_state)
+
+
+func _on_death_area_3d_body_entered(body: Node3D) -> void:
+	phase_state = PhaseState.FAILED_THIS_ROUND

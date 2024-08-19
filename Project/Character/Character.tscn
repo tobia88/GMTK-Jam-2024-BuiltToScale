@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://husagdbw62l7"]
+[gd_scene load_steps=23 format=3 uid="uid://husagdbw62l7"]
 
 [ext_resource type="Script" path="res://Scripts/Character/Character.gd" id="1_c3mco"]
 [ext_resource type="PackedScene" uid="uid://nnogmwxi85ku" path="res://Character/Mesh_Character.glb" id="2_osmc8"]
@@ -6,6 +6,106 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ul1pr"]
 size = Vector3(1, 2, 1)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_b0kcs"]
+animation = &"Fall"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6mrbf"]
+animation = &"Rise"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lnhbi"]
+advance_mode = 2
+advance_condition = &"is_rising"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g0hu3"]
+advance_mode = 2
+advance_condition = &"is_falling"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v0qag"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"is_falling"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_c7yjb"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"is_rising"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_1dvma"]
+states/End/position = Vector2(542, 453.333)
+states/Fall/node = SubResource("AnimationNodeAnimation_b0kcs")
+states/Fall/position = Vector2(670.667, 274.872)
+states/Rise/node = SubResource("AnimationNodeAnimation_6mrbf")
+states/Rise/position = Vector2(427.333, 274.753)
+states/Start/position = Vector2(552, 92)
+transitions = ["Start", "Rise", SubResource("AnimationNodeStateMachineTransition_lnhbi"), "Start", "Fall", SubResource("AnimationNodeStateMachineTransition_g0hu3"), "Rise", "Fall", SubResource("AnimationNodeStateMachineTransition_v0qag"), "Fall", "Rise", SubResource("AnimationNodeStateMachineTransition_c7yjb")]
+graph_offset = Vector2(-128, -75)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_30mym"]
+animation = &"Idle"
+use_custom_timeline = true
+timeline_length = 1.0
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dvbhr"]
+animation = &"Run_F"
+use_custom_timeline = true
+timeline_length = 1.0
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_o8jch"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_35xan"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"is_running"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3j4ql"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"is_idle"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_1asuw"]
+states/Idle/node = SubResource("AnimationNodeAnimation_30mym")
+states/Idle/position = Vector2(403, 106)
+states/Run_F/node = SubResource("AnimationNodeAnimation_dvbhr")
+states/Run_F/position = Vector2(694.333, 106)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_o8jch"), "Idle", "Run_F", SubResource("AnimationNodeStateMachineTransition_35xan"), "Run_F", "Idle", SubResource("AnimationNodeStateMachineTransition_3j4ql")]
+graph_offset = Vector2(-83, -72)
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ga6or"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q2iw3"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"is_on_air"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7aqcw"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"is_on_floor"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_45h6h"]
+states/SM_Air/node = SubResource("AnimationNodeStateMachine_1dvma")
+states/SM_Air/position = Vector2(685.333, 99.8683)
+states/SM_Floor/node = SubResource("AnimationNodeStateMachine_1asuw")
+states/SM_Floor/position = Vector2(433.333, 100.222)
+states/Start/position = Vector2(222.667, 100.123)
+transitions = ["Start", "SM_Floor", SubResource("AnimationNodeStateMachineTransition_ga6or"), "SM_Floor", "SM_Air", SubResource("AnimationNodeStateMachineTransition_q2iw3"), "SM_Air", "SM_Floor", SubResource("AnimationNodeStateMachineTransition_7aqcw")]
+graph_offset = Vector2(-106, -157)
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_2b3tw"]
+graph_offset = Vector2(-1015.02, -139.451)
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_45h6h")
+nodes/StateMachine/position = Vector2(-493.333, 26.6667)
+nodes/output/position = Vector2(-40, 80)
+node_connections = [&"output", 0, &"StateMachine"]
 
 [node name="Character" type="CharacterBody3D"]
 script = ExtResource("1_c3mco")
@@ -16,6 +116,18 @@ shape = SubResource("BoxShape3D_ul1pr")
 
 [node name="Mesh" parent="." instance=ExtResource("2_osmc8")]
 unique_name_in_owner = true
+
+[node name="Skeleton3D" parent="Mesh/Character" index="0"]
+bones/1/rotation = Quaternion(0.185905, 0, 5.19112e-08, 0.982568)
+bones/2/rotation = Quaternion(0.185905, 3.67792e-15, 5.19112e-08, 0.982568)
+bones/3/rotation = Quaternion(0.889714, 0.0955437, -0.213077, 0.392273)
+bones/3/scale = Vector3(1, 1, 1)
+bones/4/rotation = Quaternion(2.09659e-07, -3.78839e-08, -0.00373025, 0.999993)
+bones/5/rotation = Quaternion(0.911363, -0.253849, -0.0221835, 0.323242)
+bones/5/scale = Vector3(1, 1, 1)
+bones/6/rotation = Quaternion(1.77973e-07, 4.36447e-08, 0.00373027, 0.999993)
+bones/8/rotation = Quaternion(1.2966e-07, -4.87304e-07, -0.000993262, 1)
+bones/9/rotation = Quaternion(6.09725e-08, -1.97069e-07, 1, 0.000344739)
 
 [node name="SpringArm3D" type="SpringArm3D" parent="."]
 unique_name_in_owner = true
@@ -37,3 +149,17 @@ outline_modulate = Color(0.1161, 0.27, 0.23922, 1)
 text = "Level=1"
 font_size = 130
 outline_size = 52
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("%Mesh")
+tree_root = SubResource("AnimationNodeBlendTree_2b3tw")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../Mesh/AnimationPlayer")
+parameters/StateMachine/conditions/is_on_air = false
+parameters/StateMachine/conditions/is_on_floor = false
+parameters/StateMachine/SM_Air/conditions/is_falling = false
+parameters/StateMachine/SM_Air/conditions/is_rising = false
+parameters/StateMachine/SM_Floor/conditions/is_idle = false
+parameters/StateMachine/SM_Floor/conditions/is_running = false
+
+[editable path="Mesh"]

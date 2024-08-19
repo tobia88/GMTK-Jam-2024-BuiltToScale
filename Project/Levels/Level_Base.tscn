@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cr4fkj12c17b0"]
+[gd_scene load_steps=11 format=3 uid="uid://cr4fkj12c17b0"]
 
 [ext_resource type="Script" path="res://Scripts/Game/Level.gd" id="1_47nh7"]
+[ext_resource type="Shader" path="res://Shaders/Shader_Ocean.gdshader" id="2_tb1jt"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_frvrd"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -15,6 +16,31 @@ sky = SubResource("Sky_wuns4")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_u1n2u"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_a830g"]
+seamless = true
+noise = SubResource("FastNoiseLite_u1n2u")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iofcg"]
+render_priority = 0
+shader = ExtResource("2_tb1jt")
+shader_parameter/base_color = Color(0, 0.53, 0.95, 1)
+shader_parameter/amplitude = 5.0
+shader_parameter/foam_color = Color(1, 1, 1, 1)
+shader_parameter/plane_size = 10.0
+shader_parameter/normal_scale = 1.0
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_a830g")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_fw3sl"]
+material = SubResource("ShaderMaterial_iofcg")
+size = Vector2(100, 100)
+subdivide_width = 100
+subdivide_depth = 100
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ob3yx"]
+size = Vector3(100, 5, 100)
+
 [node name="Level_Base" type="Node3D" groups=["level"]]
 script = ExtResource("1_47nh7")
 
@@ -28,3 +54,15 @@ light_energy = 0.5
 shadow_enabled = true
 directional_shadow_split_3 = 0.474
 directional_shadow_blend_splits = true
+
+[node name="WaterPlane" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("PlaneMesh_fw3sl")
+
+[node name="DeathArea3D" type="Area3D" parent="WaterPlane"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WaterPlane/DeathArea3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0)
+shape = SubResource("BoxShape3D_ob3yx")
+
+[connection signal="body_entered" from="WaterPlane/DeathArea3D" to="." method="_on_death_area_3d_body_entered"]
