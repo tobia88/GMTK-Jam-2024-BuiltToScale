@@ -13,7 +13,7 @@ var target_offset: Vector3 = Vector3.ZERO
 
 func _ready() -> void:
 	spring_length = camera.position.z
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	target_offset = position
 
 	top_level = true

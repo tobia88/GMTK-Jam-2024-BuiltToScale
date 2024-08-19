@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bdea8xcopcx3i"]
+
+[ext_resource type="Script" path="res://Scripts/Gimmick/Gimmick_Bridge.gd" id="1_0wj0l"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_twyw5"]
+size = Vector3(3, 5, 0.2)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_42sug"]
+data = PackedVector3Array(-1.5, 2.5, 0.1, 1.5, 2.5, 0.1, -1.5, -2.5, 0.1, 1.5, 2.5, 0.1, 1.5, -2.5, 0.1, -1.5, -2.5, 0.1, 1.5, 2.5, -0.1, -1.5, 2.5, -0.1, 1.5, -2.5, -0.1, -1.5, 2.5, -0.1, -1.5, -2.5, -0.1, 1.5, -2.5, -0.1, 1.5, 2.5, 0.1, 1.5, 2.5, -0.1, 1.5, -2.5, 0.1, 1.5, 2.5, -0.1, 1.5, -2.5, -0.1, 1.5, -2.5, 0.1, -1.5, 2.5, -0.1, -1.5, 2.5, 0.1, -1.5, -2.5, -0.1, -1.5, 2.5, 0.1, -1.5, -2.5, 0.1, -1.5, -2.5, -0.1, 1.5, 2.5, 0.1, -1.5, 2.5, 0.1, 1.5, 2.5, -0.1, -1.5, 2.5, 0.1, -1.5, 2.5, -0.1, 1.5, 2.5, -0.1, -1.5, -2.5, 0.1, 1.5, -2.5, 0.1, -1.5, -2.5, -0.1, 1.5, -2.5, 0.1, 1.5, -2.5, -0.1, -1.5, -2.5, -0.1)
+
+[node name="Gimmick_Bridge" type="Node3D"]
+script = ExtResource("1_0wj0l")
+
+[node name="Mesh_Pivot" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Mesh_Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0.1)
+mesh = SubResource("BoxMesh_twyw5")
+skeleton = NodePath("AnimatableBody3D")
+
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="Mesh_Pivot/MeshInstance3D"]
+sync_to_physics = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mesh_Pivot/MeshInstance3D/AnimatableBody3D"]
+shape = SubResource("ConcavePolygonShape3D_42sug")

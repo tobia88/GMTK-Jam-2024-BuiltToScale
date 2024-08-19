@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://djeyvot68y7at"]
+
+[ext_resource type="Script" path="res://Scripts/Gimmick/Gimmick_Trigger.gd" id="1_3onlq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6mvjc"]
+albedo_color = Color(1, 0.26, 0.26, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rgstg"]
+material = SubResource("StandardMaterial3D_6mvjc")
+size = Vector3(1.5, 0.25, 1.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l54bk"]
+size = Vector3(0.34668, 0.361328, 0.329834)
+
+[sub_resource type="BoxMesh" id="BoxMesh_orstj"]
+size = Vector3(2, 0.25, 2)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_y4uq4"]
+data = PackedVector3Array(-1, 0.125, 1, 1, 0.125, 1, -1, -0.125, 1, 1, 0.125, 1, 1, -0.125, 1, -1, -0.125, 1, 1, 0.125, -1, -1, 0.125, -1, 1, -0.125, -1, -1, 0.125, -1, -1, -0.125, -1, 1, -0.125, -1, 1, 0.125, 1, 1, 0.125, -1, 1, -0.125, 1, 1, 0.125, -1, 1, -0.125, -1, 1, -0.125, 1, -1, 0.125, -1, -1, 0.125, 1, -1, -0.125, -1, -1, 0.125, 1, -1, -0.125, 1, -1, -0.125, -1, 1, 0.125, 1, -1, 0.125, 1, 1, 0.125, -1, -1, 0.125, 1, -1, 0.125, -1, 1, 0.125, -1, -1, -0.125, 1, 1, -0.125, 1, -1, -0.125, -1, 1, -0.125, 1, 1, -0.125, -1, -1, -0.125, -1)
+
+[node name="GimmickTrigger" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00720692, 0, 0)
+script = ExtResource("1_3onlq")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.353976, 0)
+mesh = SubResource("BoxMesh_rgstg")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.693279, 0)
+shape = SubResource("BoxShape3D_l54bk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13, 0)
+mesh = SubResource("BoxMesh_orstj")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_y4uq4")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

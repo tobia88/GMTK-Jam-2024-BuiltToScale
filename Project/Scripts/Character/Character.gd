@@ -12,7 +12,7 @@ class JumpRequest:
 
 
 const move_speed := 8.0
-const jump_height := 2.0
+const jump_height := 1.5
 const power_jump_height_multiplier := 2.5
 
 @export var gravity_scale := 5.0
@@ -49,6 +49,8 @@ class AnimParams:
 	var is_on_floor: bool = false
 	var is_falling: bool = false
 	var is_running: bool = false
+	var scale_add_value: float = 0.0
+	var scale_value: float = 0.0
 
 @onready var anim_params: AnimParams = AnimParams.new()
 
@@ -83,6 +85,11 @@ func _collect_animation_params(delta: float) -> void:
 	anim_params.is_on_floor = is_on_floor()
 	anim_params.is_falling = velocity.y < 0.0
 	anim_params.is_running = anim_params.is_on_floor and (Vector2(velocity.x, velocity.z).length() > 0)
+	anim_params.scale_add_value = 1.0 if scale_lvl > 0.0 else 0.0
+	
+	var target_value = (scale_lvl - 1.0)
+	const scale_smooth_speed = 5.0
+	anim_params.scale_value = move_toward(anim_params.scale_value, target_value, delta * scale_smooth_speed)
 
 
 func _update_animation_tree() -> void:
@@ -94,6 +101,9 @@ func _update_animation_tree() -> void:
 	
 	animation_tree["parameters/StateMachine/SM_Air/conditions/is_falling"] = anim_params.is_falling
 	animation_tree["parameters/StateMachine/SM_Air/conditions/is_rising"] = !anim_params.is_falling
+	
+	animation_tree["parameters/Add_Scale/add_amount"] = anim_params.scale_add_value
+	animation_tree["parameters/BS_Scale/blend_position"] = anim_params.scale_value
 
 
 func _handle_input(delta: float) -> void:
@@ -182,7 +192,7 @@ func compute_jump_height(target_height: float) -> float:
 
 func update_scale() -> void:
 	# process scale
-	const scale_bonus_per_lvl := 0.5
+	const scale_bonus_per_lvl := 0.1
 	scale = Vector3.ONE + Vector3.ONE * (scale_lvl - 1) * scale_bonus_per_lvl
 
 

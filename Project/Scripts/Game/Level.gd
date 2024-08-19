@@ -42,6 +42,8 @@ var target_structure_count: int:
 
 var player_ctrl: PlayerCtrl
 
+@export var max_lives: int = 3;
+
 signal on_level_state_changed(new_state: LevelState)
 signal on_phase_state_changed(new_state: PhaseState)
 
@@ -65,6 +67,12 @@ func on_character_collide_structure(character: Character, structure: TargetStruc
 	else:
 		structure.dead()
 	print_debug("%s is collide with %s" % [character.name, structure.name])
+
+
+func on_character_interact_gimmick(character: Character, gimmick: Gimmick_Trigger) -> void:
+	print_debug("%s is interact %s" % [character.name, gimmick.name])
+	if character.scale_lvl >= gimmick.required_lvl:
+		gimmick.is_operated = true
 
 
 func _process_pending_states() -> void:
@@ -127,7 +135,19 @@ func _enter_phase_state(new_state: PhaseState) -> void:
 	_phase_state = new_state
 	print_debug("Enter Phase State: %s" % str(PhaseState.keys()[_phase_state]))
 	on_phase_state_changed.emit(_phase_state)
+	
+	match _phase_state:
+		PhaseState.ROCK_AND_ROLL:
+			player_ctrl._active_character = player_ctrl.spawn_character()
+			player_ctrl._update_camera()
+			player_ctrl._update_ui()
+	
+		PhaseState.FAILED_THIS_ROUND:
+			player_ctrl._active_character.dead()
+			phase_state = PhaseState.ROCK_AND_ROLL
 
 
 func _on_death_area_3d_body_entered(body: Node3D) -> void:
-	phase_state = PhaseState.FAILED_THIS_ROUND
+	if body is Character and phase_state == PhaseState.ROCK_AND_ROLL:
+		phase_state = PhaseState.FAILED_THIS_ROUND
+	pass

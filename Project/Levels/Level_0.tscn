@@ -22,3 +22,6 @@ metadata/_edit_group_ = true
 
 [node name="TargetStructure" parent="." index="4" instance=ExtResource("4_5an5h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.40653, 1, -7.28897)
+
+[node name="CollisionShape3D" parent="WaterPlane/DeathArea3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)

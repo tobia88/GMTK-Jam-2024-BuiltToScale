@@ -3,10 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bucna1gqdeuee"
-path.s3tc="res://.godot/imported/Mesh_Castle_tex_castle_palette.png-ff2a95f69254a9433cd01a49f31d91b8.s3tc.ctex"
+path="res://.godot/imported/Mesh_Castle_tex_castle_palette.png-ff2a95f69254a9433cd01a49f31d91b8.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 generator_parameters={
 "md5": "8326046f4166585828b25cc6e14d7d7e"
@@ -15,11 +14,11 @@ generator_parameters={
 [deps]
 
 source_file="res://TargetStructure/Mesh_Castle_tex_castle_palette.png"
-dest_files=["res://.godot/imported/Mesh_Castle_tex_castle_palette.png-ff2a95f69254a9433cd01a49f31d91b8.s3tc.ctex"]
+dest_files=["res://.godot/imported/Mesh_Castle_tex_castle_palette.png-ff2a95f69254a9433cd01a49f31d91b8.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
