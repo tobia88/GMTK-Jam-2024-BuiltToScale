@@ -12,22 +12,19 @@ uniform sampler2D depth_texture : hint_depth_texture;
 uniform float plane_size = 100;
 uniform float normal_scale = 1.0;
 
-varying vec2 tex_uv;
-
 float height(vec2 pos, float time) {
 	vec2 offset = 0.01 * cos(pos + time);
 	return texture(noise_tex, (pos * 0.05) - offset).r * amplitude;
 }
 
 void vertex() {
-	vec2 pos = VERTEX.xz;
-	float k = height(pos, TIME);
-	VERTEX.y = k;
-	
-	float uv_offset = 1.0 / plane_size;
-	float k_r = height(pos + vec2(uv_offset, 0.0), TIME);
-	float k_f = height(pos + vec2(0.0, uv_offset), TIME);
-	NORMAL = normalize(vec3(k - k_r, uv_offset, k - k_f));
+	//vec2 pos = VERTEX.xz;
+	//float k = height(pos, TIME);
+	//VERTEX.y = k;
+	//float uv_offset = 1.0 / plane_size;
+	//float k_r = height(pos + vec2(uv_offset, 0.0), TIME);
+	//float k_f = height(pos + vec2(0.0, uv_offset), TIME);
+	//NORMAL = normalize(vec3(k - k_r, uv_offset, k - k_f));
 }
 
 void fragment() {
@@ -48,15 +45,9 @@ void fragment() {
 	// Called for every pixel the material is visible on.
 	RIM = 0.2;
 	METALLIC = 0.0;
-	//ROUGHNESS = 0.01 * (1.0 - fresnal);
 	ROUGHNESS = 0.0;
 
 	ALBEDO = final_color;
-	//ALBEDO = vec3(foam_mask);
-	//ALBEDO = vec3(NORMAL);
-	//ALBEDO = vec3(depth_blend);
-	
-	//NORMAL = texture(normal_tex, tex_uv).rgb;
 }
 
 //void light() {

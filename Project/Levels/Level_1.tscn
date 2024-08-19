@@ -28,3 +28,6 @@ metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="TargetStructure" parent="." index="5" instance=ExtResource("5_4m14t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.44309, 2, -22.1459)
+
+[node name="WaterPlane" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00894094, 0.526875, -0.0173607)

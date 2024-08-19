@@ -118,8 +118,8 @@ shape = SubResource("BoxShape3D_ul1pr")
 unique_name_in_owner = true
 
 [node name="Skeleton3D" parent="Mesh/Character" index="0"]
-bones/1/rotation = Quaternion(0.185905, 0, 5.19112e-08, 0.982568)
-bones/2/rotation = Quaternion(0.185905, 3.67792e-15, 5.19112e-08, 0.982568)
+bones/1/rotation = Quaternion(0.129145, 2.43397e-15, 2.98876e-08, 0.991626)
+bones/2/rotation = Quaternion(0.129145, -3.83817e-15, 2.98876e-08, 0.991626)
 bones/3/rotation = Quaternion(0.889714, 0.0955437, -0.213077, 0.392273)
 bones/3/scale = Vector3(1, 1, 1)
 bones/4/rotation = Quaternion(2.09659e-07, -3.78839e-08, -0.00373025, 0.999993)
