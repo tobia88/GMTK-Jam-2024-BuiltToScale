@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://gvw5cn72rlwq"]
+
+[ext_resource type="PackedScene" uid="uid://doo26nt2yfwpb" path="res://TargetStructure/TargetStructure.tscn" id="1_b3g3e"]
+[ext_resource type="PackedScene" uid="uid://dsekbudahhxgc" path="res://TargetStructure/Mesh_Castle.glb" id="2_f6d2q"]
+
+[node name="TargetStructure" instance=ExtResource("1_b3g3e")]
+
+[node name="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0.965, 0)
+
+[node name="Label3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.08009, 0)
+
+[node name="Mesh_Castle" parent="." index="2" instance=ExtResource("2_f6d2q")]

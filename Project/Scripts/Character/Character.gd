@@ -40,6 +40,9 @@ var should_consume_lvl := false
 var should_jump := false
 var is_power_jump := false
 
+var target_quat := Quaternion.IDENTITY
+@onready var mesh : Node3D = %Mesh
+
 
 func get_merged_gravity() -> Vector3:
 	return get_gravity() * gravity_scale
@@ -48,6 +51,7 @@ func get_merged_gravity() -> Vector3:
 func _process(delta: float) -> void:
 	_handle_input(delta)
 	_process_movement(delta)
+	_process_rotation(delta)
 	_process_consume_lvl()
 	_cleanup_requests()
 	_debug_draw()
@@ -58,7 +62,7 @@ func launch_by_target_height(target_height: float) -> void:
 
 
 func dead() -> void:
-	$MeshInstance3D.visible = false
+	mesh.visible = false
 
 
 func _handle_input(delta: float) -> void:
@@ -99,6 +103,20 @@ func _process_movement(delta: float) -> void:
 
 	if move_and_slide():
 		_process_collision()
+
+
+func _process_rotation(delta: float) -> void:
+	var target_dir_2d = Vector3(velocity.x, 0.0, velocity.z).normalized()
+	if target_dir_2d.length() == 0.0:
+		target_dir_2d = global_basis.z
+	
+	var target_yaw = atan2(target_dir_2d.x, target_dir_2d.z)
+	target_quat = Quaternion.from_euler(Vector3(0.0, target_yaw, 0.0))
+	
+	const rotate_smooth_spd := 10
+	quaternion = quaternion.slerp(target_quat, 1.0 - exp(-delta * rotate_smooth_spd))
+
+	DebugDraw3D.draw_arrow(global_position, global_position + global_basis.z * 20, Color.RED)
 
 
 func _process_consume_lvl() -> void:

@@ -1,19 +1,16 @@
 [gd_scene load_steps=5 format=3 uid="uid://bedcq5dqukwc1"]
 
 [ext_resource type="PackedScene" uid="uid://cr4fkj12c17b0" path="res://Levels/Level_Base.tscn" id="1_th5nm"]
-[ext_resource type="PackedScene" uid="uid://doo26nt2yfwpb" path="res://TargetStructure/TargetStructure.tscn" id="3_e17sb"]
+[ext_resource type="PackedScene" uid="uid://gvw5cn72rlwq" path="res://TargetStructure/TargetStructure_Castle_1.tscn" id="4_5an5h"]
 [ext_resource type="PackedScene" uid="uid://dx5vngxya1wbv" path="res://Misc/Misc_CharacterStart.tscn" id="5_oyw5a"]
 [ext_resource type="MeshLibrary" uid="uid://c3ijsktjtkbga" path="res://Environment/MeshLib_BlockTiles.tres" id="6_kbcmv"]
 
 [node name="Level_0" instance=ExtResource("1_th5nm")]
 
-[node name="TargetStructure" parent="." index="2" instance=ExtResource("3_e17sb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4141, 1.01904, -8.07686)
-
-[node name="MiscCharacterStart" parent="." index="3" instance=ExtResource("5_oyw5a")]
+[node name="MiscCharacterStart" parent="." index="2" instance=ExtResource("5_oyw5a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0376205, 0.0138854, 26.1266)
 
-[node name="GridMap" type="GridMap" parent="." index="4"]
+[node name="GridMap" type="GridMap" parent="." index="3"]
 mesh_library = ExtResource("6_kbcmv")
 cell_size = Vector3(1, 1, 1)
 cell_center_y = false
@@ -22,3 +19,6 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 2, 0)
 metadata/_edit_group_ = true
+
+[node name="TargetStructure" parent="." index="4" instance=ExtResource("4_5an5h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.40653, 1, -7.28897)

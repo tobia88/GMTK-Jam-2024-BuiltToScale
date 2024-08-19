@@ -14,7 +14,8 @@ script = ExtResource("1_c3mco")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_ul1pr")
 
-[node name="Mesh_Character" parent="." instance=ExtResource("2_osmc8")]
+[node name="Mesh" parent="." instance=ExtResource("2_osmc8")]
+unique_name_in_owner = true
 
 [node name="SpringArm3D" type="SpringArm3D" parent="."]
 unique_name_in_owner = true
