@@ -1,30 +1,57 @@
-[gd_scene load_steps=7 format=3 uid="uid://djeyvot68y7at"]
+[gd_scene load_steps=13 format=3 uid="uid://djeyvot68y7at"]
 
 [ext_resource type="Script" path="res://Scripts/Gimmick/Gimmick_Trigger.gd" id="1_3onlq"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6mvjc"]
-albedo_color = Color(1, 0.26, 0.26, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_rgstg"]
-material = SubResource("StandardMaterial3D_6mvjc")
-size = Vector3(1.5, 0.25, 1.5)
+[ext_resource type="PackedScene" uid="uid://dmvxxea2tahqw" path="res://Gimmicks/Trigger/Gimmick_Trigger_Physics.tscn" id="2_57a0n"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_l54bk"]
 size = Vector3(0.34668, 0.361328, 0.329834)
 
-[sub_resource type="BoxMesh" id="BoxMesh_orstj"]
-size = Vector3(2, 0.25, 2)
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_at4yn"]
+animation = &"FailedPressed"
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_y4uq4"]
-data = PackedVector3Array(-1, 0.125, 1, 1, 0.125, 1, -1, -0.125, 1, 1, 0.125, 1, 1, -0.125, 1, -1, -0.125, 1, 1, 0.125, -1, -1, 0.125, -1, 1, -0.125, -1, -1, 0.125, -1, -1, -0.125, -1, 1, -0.125, -1, 1, 0.125, 1, 1, 0.125, -1, 1, -0.125, 1, 1, 0.125, -1, 1, -0.125, -1, 1, -0.125, 1, -1, 0.125, -1, -1, 0.125, 1, -1, -0.125, -1, -1, 0.125, 1, -1, -0.125, 1, -1, -0.125, -1, 1, 0.125, 1, -1, 0.125, 1, 1, 0.125, -1, -1, 0.125, 1, -1, 0.125, -1, 1, 0.125, -1, -1, -0.125, 1, 1, -0.125, 1, -1, -0.125, -1, 1, -0.125, 1, 1, -0.125, -1, -1, -0.125, -1)
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_me1q0"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_oxsq4"]
+animation = &"Pressed"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mjrrg"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ds4mc"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ifdut"]
+advance_mode = 2
+advance_condition = &"is_operated"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vs63y"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"is_idle"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_kjbi7"]
+states/Pressed/node = SubResource("AnimationNodeAnimation_oxsq4")
+states/Pressed/position = Vector2(594.667, 98.8148)
+states/RESET/node = SubResource("AnimationNodeAnimation_mjrrg")
+states/RESET/position = Vector2(363.333, 90.4445)
+states/Start/position = Vector2(166, 95.5556)
+transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_ds4mc"), "RESET", "Pressed", SubResource("AnimationNodeStateMachineTransition_ifdut"), "Pressed", "RESET", SubResource("AnimationNodeStateMachineTransition_vs63y")]
+graph_offset = Vector2(-289, -135)
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_d23b1"]
+graph_offset = Vector2(-776.439, -31.535)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_at4yn")
+nodes/Animation/position = Vector2(-426.667, 320)
+nodes/OS_Failed/node = SubResource("AnimationNodeOneShot_me1q0")
+nodes/OS_Failed/position = Vector2(-146.667, 120)
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_kjbi7")
+nodes/StateMachine/position = Vector2(-413.333, 26.6667)
+nodes/output/position = Vector2(293.333, 26.6667)
+node_connections = [&"OS_Failed", 0, &"StateMachine", &"OS_Failed", 1, &"Animation", &"output", 0, &"OS_Failed"]
 
 [node name="GimmickTrigger" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00720692, 0, 0)
 script = ExtResource("1_3onlq")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.353976, 0)
-mesh = SubResource("BoxMesh_rgstg")
 
 [node name="Area3D" type="Area3D" parent="."]
 
@@ -32,13 +59,18 @@ mesh = SubResource("BoxMesh_rgstg")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.693279, 0)
 shape = SubResource("BoxShape3D_l54bk")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13, 0)
-mesh = SubResource("BoxMesh_orstj")
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../Mesh_Gimmick_Trigger")
+tree_root = SubResource("AnimationNodeBlendTree_d23b1")
+anim_player = NodePath("../Mesh_Gimmick_Trigger/AnimationPlayer")
+parameters/OS_Failed/active = false
+parameters/OS_Failed/internal_active = false
+parameters/OS_Failed/request = 0
+parameters/StateMachine/conditions/is_idle = false
+parameters/StateMachine/conditions/is_operated = false
 
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_y4uq4")
+[node name="Mesh_Gimmick_Trigger" parent="." instance=ExtResource("2_57a0n")]
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+
+[editable path="Mesh_Gimmick_Trigger"]

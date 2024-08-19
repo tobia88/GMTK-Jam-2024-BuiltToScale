@@ -69,10 +69,12 @@ func on_character_collide_structure(character: Character, structure: TargetStruc
 	print_debug("%s is collide with %s" % [character.name, structure.name])
 
 
-func on_character_interact_gimmick(character: Character, gimmick: Gimmick_Trigger) -> void:
+func on_character_interact_gimmick(character: Character, gimmick: Gimmick) -> void:
 	print_debug("%s is interact %s" % [character.name, gimmick.name])
 	if character.scale_lvl >= gimmick.required_lvl:
 		gimmick.is_operated = true
+	else:
+		gimmick.on_operate_failed()
 
 
 func _process_pending_states() -> void:

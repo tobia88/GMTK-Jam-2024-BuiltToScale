@@ -1,20 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://cr4fkj12c17b0"]
+[gd_scene load_steps=9 format=3 uid="uid://cr4fkj12c17b0"]
 
 [ext_resource type="Script" path="res://Scripts/Game/Level.gd" id="1_47nh7"]
+[ext_resource type="Environment" uid="uid://tsstcvnmnxuh" path="res://Levels/Env_Main.tres" id="2_5hky5"]
 [ext_resource type="Shader" path="res://Shaders/Shader_Ocean.gdshader" id="2_tb1jt"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_frvrd"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-
-[sub_resource type="Sky" id="Sky_wuns4"]
-sky_material = SubResource("ProceduralSkyMaterial_frvrd")
-
-[sub_resource type="Environment" id="Environment_4cw08"]
-background_mode = 2
-sky = SubResource("Sky_wuns4")
-tonemap_mode = 2
-glow_enabled = true
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_u1n2u"]
 
@@ -34,9 +22,9 @@ shader_parameter/noise_tex = SubResource("NoiseTexture2D_a830g")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_fw3sl"]
 material = SubResource("ShaderMaterial_iofcg")
-size = Vector2(100, 100)
-subdivide_width = 100
-subdivide_depth = 100
+size = Vector2(200, 200)
+subdivide_width = 200
+subdivide_depth = 200
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ob3yx"]
 size = Vector3(100, 5, 100)
@@ -45,11 +33,10 @@ size = Vector3(100, 5, 100)
 script = ExtResource("1_47nh7")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_4cw08")
+environment = ExtResource("2_5hky5")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.354046, 0.935228, 0, -0.935228, 0.354046, -2.30252, 11.2682, 15.4492)
-light_color = Color(1, 0.999167, 0.95, 1)
 light_energy = 0.5
 shadow_enabled = true
 directional_shadow_split_3 = 0.474
