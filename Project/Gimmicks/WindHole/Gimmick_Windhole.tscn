@@ -121,7 +121,7 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 shape = SubResource("SphereShape3D_55kbm")
 
 [node name="Mesh_Gimmick_Windhole" parent="." instance=ExtResource("3_a0sbt")]
-transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 0, 0, 0)
+transform = Transform3D(1.3, 0, 0, 0, 1.5, 0, 0, 0, 1.3, 0, 0, 0)
 
 [node name="Skeleton3D" parent="Mesh_Gimmick_Windhole/Armature" index="0"]
 bones/1/rotation = Quaternion(0.509347, -0.500525, -0.4993, -0.490652)

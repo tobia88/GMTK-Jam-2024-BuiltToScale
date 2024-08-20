@@ -160,6 +160,9 @@ func _enter_phase_state(new_state: PhaseState) -> void:
 
 
 func _reset_all_gimmicks() -> void:
+	if player_ctrl._active_character:
+		player_ctrl._active_character.queue_free()
+
 	for gimmick: Gimmick in get_tree().get_nodes_in_group("gimmick"):
 		gimmick.reset()
 		

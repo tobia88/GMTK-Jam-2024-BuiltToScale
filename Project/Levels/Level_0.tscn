@@ -28,5 +28,5 @@ metadata/_edit_group_ = true
 [node name="TargetStructure" parent="." index="5" instance=ExtResource("4_5an5h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.78643, 1.17257, -8.72002)
 
-[node name="Building" parent="." index="6" instance=ExtResource("5_4vfso")]
+[node name="Gimmick_WindHole" parent="." index="6" instance=ExtResource("5_4vfso")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5781, 4, -10.0304)

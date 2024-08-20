@@ -38,14 +38,7 @@ size = Vector3(100, 5, 100)
 [node name="WorldEnvironment2" type="WorldEnvironment" parent="." index="3"]
 environment = ExtResource("2_refdc")
 
-[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="." index="4"]
-transform = Transform3D(1, 0, 0, 0, 0.354046, 0.935228, 0, -0.935228, 0.354046, -2.30252, 11.2682, 15.4492)
-light_energy = 0.5
-shadow_enabled = true
-directional_shadow_split_3 = 0.474
-directional_shadow_blend_splits = true
-
-[node name="WaterPlane2" type="MeshInstance3D" parent="." index="5"]
+[node name="WaterPlane2" type="MeshInstance3D" parent="." index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0387948, 0.606492, -0.0607948)
 mesh = SubResource("PlaneMesh_2gw3l")
 
@@ -56,8 +49,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0)
 shape = SubResource("BoxShape3D_glghn")
 
-[node name="Building" parent="." index="6" instance=ExtResource("3_aidsj")]
+[node name="Building" parent="." index="5" instance=ExtResource("3_aidsj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.9429, 3.99948, -1.15595)
+
+[node name="Building2" parent="." index="6" instance=ExtResource("3_aidsj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.68914, 2.02509, -19.7451)
 
 [node name="MiscCharacterStart" parent="." index="7" instance=ExtResource("5_7exs0")]
 transform = Transform3D(0.999577, 0, 0.029091, 0, 1, 0, -0.029091, 0, 0.999577, -6.11497, 0.918708, 5.26883)
