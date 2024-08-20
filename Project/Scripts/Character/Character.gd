@@ -125,6 +125,12 @@ func _handle_jump_input() -> void:
 
 		should_jump = true
 		is_power_jump = true
+		
+	if should_jump:
+		if is_power_jump:
+			$AudioStreamPlayer_Jump_Power.play()
+		else:
+			$AudioStreamPlayer_Jump.play()
 
 
 func _process_movement(delta: float) -> void:

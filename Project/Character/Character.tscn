@@ -1,8 +1,10 @@
-[gd_scene load_steps=29 format=3 uid="uid://husagdbw62l7"]
+[gd_scene load_steps=32 format=3 uid="uid://husagdbw62l7"]
 
 [ext_resource type="Script" path="res://Scripts/Character/Character.gd" id="1_c3mco"]
 [ext_resource type="PackedScene" uid="uid://nnogmwxi85ku" path="res://Character/Mesh_Character.glb" id="2_osmc8"]
 [ext_resource type="Script" path="res://Scripts/Camera/CameraSpringArm.gd" id="4_eit5j"]
+[ext_resource type="AudioStream" uid="uid://dqqp11d3yvyvp" path="res://Sounds/Sfx_Character_Jump_Randomizer.tres" id="4_vkghy"]
+[ext_resource type="AudioStream" uid="uid://34u8aiiji46o" path="res://Sounds/Sfx_Character_Jump_Power.wav" id="5_ur5p6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kp06v"]
 
@@ -124,7 +126,6 @@ transitions = ["Start", "SM_Floor", SubResource("AnimationNodeStateMachineTransi
 graph_offset = Vector2(-278, -65)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_2b3tw"]
-graph_offset = Vector2(-1041.44, -10.4586)
 nodes/Add_Scale/node = SubResource("AnimationNodeAdd2_gbrv3")
 nodes/Add_Scale/position = Vector2(-226.667, 80)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_iml3r")
@@ -135,6 +136,11 @@ nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_45h6h")
 nodes/StateMachine/position = Vector2(-466.667, 26.6667)
 nodes/output/position = Vector2(-40, 80)
 node_connections = [&"Add_Scale", 0, &"StateMachine", &"Add_Scale", 1, &"BS_Scale", &"output", 0, &"Add_Scale"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qg8ps"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("5_ur5p6")
 
 [node name="Character" type="CharacterBody3D"]
 script = ExtResource("1_c3mco")
@@ -190,5 +196,15 @@ parameters/StateMachine/SM_Air/conditions/is_falling = false
 parameters/StateMachine/SM_Air/conditions/is_rising = false
 parameters/StateMachine/SM_Floor/conditions/is_idle = false
 parameters/StateMachine/SM_Floor/conditions/is_running = false
+
+[node name="AudioStreamPlayer_Jump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_vkghy")
+volume_db = -5.0
+bus = &"SFX"
+
+[node name="AudioStreamPlayer_Jump_Power" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_qg8ps")
+volume_db = 5.0
+bus = &"SFX"
 
 [editable path="Mesh"]

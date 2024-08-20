@@ -37,6 +37,7 @@ func _update_particles() -> void:
 	if last_is_operated != is_operated and is_operated:
 		animation_player.active = true
 		animation_player.play("Activate")
+		$AudioStreamPlayer_BlowUp.play()
 
 
 func _on_area_3d_body_entered(body: Node3D) -> void:

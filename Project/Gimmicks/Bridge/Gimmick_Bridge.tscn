@@ -1,25 +1,64 @@
-[gd_scene load_steps=4 format=3 uid="uid://bdea8xcopcx3i"]
+[gd_scene load_steps=11 format=3 uid="uid://bdea8xcopcx3i"]
 
 [ext_resource type="Script" path="res://Scripts/Gimmick/Gimmick_Bridge.gd" id="1_0wj0l"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_twyw5"]
-size = Vector3(3, 5, 0.2)
+[ext_resource type="PackedScene" uid="uid://bjah15w6htvq4" path="res://Gimmicks/Bridge/Mesh_Grimmick_Bridge.glb" id="2_u0m3v"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_42sug"]
 data = PackedVector3Array(-1.5, 2.5, 0.1, 1.5, 2.5, 0.1, -1.5, -2.5, 0.1, 1.5, 2.5, 0.1, 1.5, -2.5, 0.1, -1.5, -2.5, 0.1, 1.5, 2.5, -0.1, -1.5, 2.5, -0.1, 1.5, -2.5, -0.1, -1.5, 2.5, -0.1, -1.5, -2.5, -0.1, 1.5, -2.5, -0.1, 1.5, 2.5, 0.1, 1.5, 2.5, -0.1, 1.5, -2.5, 0.1, 1.5, 2.5, -0.1, 1.5, -2.5, -0.1, 1.5, -2.5, 0.1, -1.5, 2.5, -0.1, -1.5, 2.5, 0.1, -1.5, -2.5, -0.1, -1.5, 2.5, 0.1, -1.5, -2.5, 0.1, -1.5, -2.5, -0.1, 1.5, 2.5, 0.1, -1.5, 2.5, 0.1, 1.5, 2.5, -0.1, -1.5, 2.5, 0.1, -1.5, 2.5, -0.1, 1.5, 2.5, -0.1, -1.5, -2.5, 0.1, 1.5, -2.5, 0.1, -1.5, -2.5, -0.1, 1.5, -2.5, 0.1, 1.5, -2.5, -0.1, -1.5, -2.5, -0.1)
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tiqkh"]
+animation = &"Activate"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5y12l"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ch3e3"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_muqlb"]
+advance_mode = 2
+advance_condition = &"is_activated"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qadvw"]
+advance_mode = 2
+advance_condition = &"is_idle"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ohrkk"]
+states/Activate/node = SubResource("AnimationNodeAnimation_tiqkh")
+states/Activate/position = Vector2(641, 101.111)
+states/RESET/node = SubResource("AnimationNodeAnimation_5y12l")
+states/RESET/position = Vector2(436.333, 98.4444)
+transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_ch3e3"), "RESET", "Activate", SubResource("AnimationNodeStateMachineTransition_muqlb"), "Activate", "RESET", SubResource("AnimationNodeStateMachineTransition_qadvw")]
+graph_offset = Vector2(-121, -114)
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_bqvup"]
+graph_offset = Vector2(-334.667, -28)
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_ohrkk")
+nodes/StateMachine/position = Vector2(-133.333, 186.667)
+nodes/output/position = Vector2(253.333, 200)
+node_connections = [&"output", 0, &"StateMachine"]
+
 [node name="Gimmick_Bridge" type="Node3D" groups=["gimmick"]]
 script = ExtResource("1_0wj0l")
 
-[node name="Mesh_Pivot" type="Node3D" parent="."]
+[node name="Mesh_Grimmick_Bridge" parent="." instance=ExtResource("2_u0m3v")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Mesh_Pivot"]
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Mesh_Grimmick_Bridge/Gimmick_Bridge/Skeleton3D" index="1"]
+bone_name = "Bone.001"
+bone_idx = 1
+
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="Mesh_Grimmick_Bridge/Gimmick_Bridge/Skeleton3D/BoneAttachment3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0.1)
-mesh = SubResource("BoxMesh_twyw5")
-skeleton = NodePath("AnimatableBody3D")
-
-[node name="AnimatableBody3D" type="AnimatableBody3D" parent="Mesh_Pivot/MeshInstance3D"]
 sync_to_physics = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Mesh_Pivot/MeshInstance3D/AnimatableBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mesh_Grimmick_Bridge/Gimmick_Bridge/Skeleton3D/BoneAttachment3D/AnimatableBody3D"]
 shape = SubResource("ConcavePolygonShape3D_42sug")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../Mesh_Grimmick_Bridge")
+tree_root = SubResource("AnimationNodeBlendTree_bqvup")
+anim_player = NodePath("../Mesh_Grimmick_Bridge/AnimationPlayer")
+parameters/StateMachine/conditions/is_activated = false
+parameters/StateMachine/conditions/is_idle = false
+
+[editable path="Mesh_Grimmick_Bridge"]

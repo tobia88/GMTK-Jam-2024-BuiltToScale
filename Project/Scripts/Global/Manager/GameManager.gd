@@ -5,6 +5,10 @@ var level_template_arr: Array[PackedScene] = [
 	preload("res://Levels/Level_1.tscn"),
 ]
 
+@onready var bgm: AudioStreamWAV = preload("res://Sounds/BGM_Main.wav")
+
+var audio_stream_player: AudioStreamPlayer
+
 var _active_level: Level
 var active_level: Level:
 	get:
@@ -15,6 +19,9 @@ var active_level: Level:
 
 
 func _ready() -> void:
+	audio_stream_player = AudioStreamPlayer.new()
+	audio_stream_player.stream = bgm
+	audio_stream_player.play()
 	start_game()
 
 

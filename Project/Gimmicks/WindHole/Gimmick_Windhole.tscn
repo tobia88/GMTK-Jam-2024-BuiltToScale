@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://bhap26c2aki1h"]
+[gd_scene load_steps=15 format=3 uid="uid://bhap26c2aki1h"]
 
 [ext_resource type="Script" path="res://Scripts/Gimmick/Gimmick_Hole.gd" id="1_srm68"]
 [ext_resource type="PackedScene" uid="uid://dxdviw06naroy" path="res://Gimmicks/WindHole/Mesh_Gimmick_Windhole.glb" id="3_a0sbt"]
 [ext_resource type="PackedScene" uid="uid://dp8j77fjmkre0" path="res://Gimmicks/WindHole/VFX_Windhole_Blow.tscn" id="3_rvbg3"]
+[ext_resource type="AudioStream" uid="uid://cwxldmgj2q3my" path="res://Sounds/Sfx_BlowUp.wav" id="4_wb3na"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_55kbm"]
 
@@ -137,6 +138,9 @@ parameters/StateMachine/conditions/is_blowing = false
 parameters/StateMachine/conditions/is_idle = false
 
 [node name="VFX_Windhole_Blow" parent="." instance=ExtResource("3_rvbg3")]
+
+[node name="AudioStreamPlayer_BlowUp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_wb3na")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 

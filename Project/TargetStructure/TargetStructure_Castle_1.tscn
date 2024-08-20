@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://gvw5cn72rlwq"]
+[gd_scene load_steps=4 format=3 uid="uid://gvw5cn72rlwq"]
 
 [ext_resource type="PackedScene" uid="uid://doo26nt2yfwpb" path="res://TargetStructure/TargetStructure.tscn" id="1_b3g3e"]
 [ext_resource type="PackedScene" uid="uid://dsekbudahhxgc" path="res://TargetStructure/Mesh_Castle.glb" id="2_f6d2q"]
+[ext_resource type="AudioStream" uid="uid://g41qkvbrh4xq" path="res://Sounds/Sfx_Castle_Explosion.wav" id="3_7ivvi"]
 
 [node name="TargetStructure" instance=ExtResource("1_b3g3e")]
 required_scale_lvl = 2
@@ -11,3 +12,6 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -0.0100708, 1.24586, 0)
 
 [node name="Mesh_Castle" parent="." index="1" instance=ExtResource("2_f6d2q")]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
+
+[node name="AudioStreamPlayer_Explosion" type="AudioStreamPlayer" parent="." index="2"]
+stream = ExtResource("3_7ivvi")

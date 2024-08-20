@@ -11,4 +11,5 @@ func _process(delta: float) -> void:
 
 
 func dead() -> void:
+	AudioManager.play_sfx($AudioStreamPlayer_Explosion.stream)
 	queue_free()
