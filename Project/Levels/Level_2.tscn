@@ -29,8 +29,8 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 48.209
 [node name="Gimmick_Bridge" parent="." index="6" instance=ExtResource("5_b8fki")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 45.3738, 2.04254, -23.5359)
 
-[node name="Building" parent="." index="7" instance=ExtResource("6_jld45")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66.0854, 3.143, -25.8306)
+[node name="Gimmick_Windhole" parent="." index="7" instance=ExtResource("6_jld45")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65.9955, 3.00658, -25.9161)
 
 [node name="GimmickTrigger" parent="." index="8" node_paths=PackedStringArray("target_gimmick") instance=ExtResource("7_2fi1t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51.0469, 2.04065, -27.0499)
