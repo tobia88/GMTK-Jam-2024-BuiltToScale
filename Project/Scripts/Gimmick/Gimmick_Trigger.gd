@@ -2,7 +2,7 @@ extends Gimmick
 
 class_name Gimmick_Trigger
 
-@export_range(1, 3) var required_lvl: int = 2
+@export_range(1, 3) var required_lvl: int = 1
 @export var target_gimmick: Gimmick
 
 @onready var trigger_area: Area3D = $Area3D

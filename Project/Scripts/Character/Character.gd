@@ -11,11 +11,12 @@ class JumpRequest:
 		is_consuming_lvl = p_is_consuming_lvl
 
 
-const move_speed := 8.0
+const move_speed := 5.0
+const airborne_move_speed_multiplier := 0.5
 const jump_height := 1.5
 const power_jump_height_multiplier := 2.5
 
-@export var gravity_scale := 5.0
+@export var gravity_scale := 2.0
 
 @onready var animation_tree := $AnimationTree
 

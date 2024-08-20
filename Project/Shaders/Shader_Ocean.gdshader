@@ -30,17 +30,17 @@ void vertex() {
 void fragment() {
 	float depth = texture(depth_texture, SCREEN_UV).r;	// non linear 0 - 1
 	vec3 ndc = vec3(SCREEN_UV * 2.0 - 1.0, depth);	// vulkan renderer ndc.z [0 - 1]
-	
+
 	// calculate world position
 	vec4 view = INV_PROJECTION_MATRIX * vec4(ndc, 1.0);
 	view.z /= view.w;
-	
+
 	//float linear_depth = -view.z;
 	float depth_blend = smoothstep(view.z + 0.5, view.z, VERTEX.z);
 	float foam_mask = depth_blend;
-	
+
 	vec3 final_color = mix(base_color.rgb, foam_color.rgb, foam_mask);
-	
+
 	float fresnal = sqrt(1.0 - dot(NORMAL, VIEW));
 	// Called for every pixel the material is visible on.
 	RIM = 0.2;

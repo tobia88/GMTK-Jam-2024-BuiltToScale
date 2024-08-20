@@ -55,17 +55,15 @@ func _process(delta: float) -> void:
 	_process_phase_state(delta)
 
 
-func on_character_enter_building(character: Character, building: Building) -> void:
-	print_debug("%s is entering %s" % [character.name, building.name])
-	building.is_activated = true
+func on_character_enter_hole(character: Character, hole: Gimmick_Hole) -> void:
+	print_debug("%s is entering %s" % [character.name, hole.name])
+	hole.is_operated = true
 
 	character.scale_lvl += 1
-	#character.launch_by_target_height(5.0)
+	character.launch_by_target_height(1.0)
 
 func on_character_collide_structure(character: Character, structure: TargetStructure) -> void:
-	if character.scale_lvl < structure.required_scale_lvl:
-		character.dead()
-	else:
+	if character.scale_lvl >= structure.required_scale_lvl:
 		structure.dead()
 	print_debug("%s is collide with %s" % [character.name, structure.name])
 
@@ -112,6 +110,9 @@ func _on_process_planning_state(delta: float) -> void:
 func _on_process_rock_and_roll_state(delta: float) -> void:
 	if target_structure_count == 0:
 		level_state = LevelState.LEVEL_CLEARED
+	else:
+		if Input.is_action_just_pressed("restart"):
+			phase_state = PhaseState.FAILED_THIS_ROUND
 
 
 func _enter_level_state(new_state: LevelState) -> void:
@@ -148,6 +149,7 @@ func _enter_phase_state(new_state: PhaseState) -> void:
 	
 	match _phase_state:
 		PhaseState.ROCK_AND_ROLL:
+			_reset_all_gimmicks()
 			player_ctrl._active_character = player_ctrl.spawn_character()
 			player_ctrl._update_camera()
 			player_ctrl._update_ui()
@@ -155,6 +157,12 @@ func _enter_phase_state(new_state: PhaseState) -> void:
 		PhaseState.FAILED_THIS_ROUND:
 			player_ctrl._active_character.dead()
 			phase_state = PhaseState.ROCK_AND_ROLL
+
+
+func _reset_all_gimmicks() -> void:
+	for gimmick: Gimmick in get_tree().get_nodes_in_group("gimmick"):
+		gimmick.reset()
+		
 
 
 func _on_death_area_3d_body_entered(body: Node3D) -> void:

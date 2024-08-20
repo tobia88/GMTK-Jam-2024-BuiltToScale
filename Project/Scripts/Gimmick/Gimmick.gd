@@ -7,3 +7,7 @@ var is_operated: bool = false
 
 func on_operate_failed() -> void:
 	pass
+	
+	
+func reset() -> void:
+	is_operated = false

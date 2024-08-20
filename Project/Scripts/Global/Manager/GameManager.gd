@@ -15,8 +15,8 @@ var active_level: Level:
 
 
 func _ready() -> void:
-	if active_level:
-		active_level.level_state = Level.LevelState.GAME_START
+	start_game()
+
 
 func load_level(idx: int) -> Level:
 	var new_lvl = level_template_arr[idx].instantiate() as Level
@@ -27,6 +27,15 @@ func load_level(idx: int) -> Level:
 func enter_next_level() -> void:
 	print_debug("Enter Next Level")
 	
+	
+func restart_level() -> void:
+	get_tree().reload_current_scene()
+	
+
+func start_game() -> void:
+	if active_level:
+		active_level.level_state = Level.LevelState.GAME_START
+
 
 func quit_game() -> void:
 	get_tree().quit()

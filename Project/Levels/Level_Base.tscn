@@ -4,13 +4,13 @@
 [ext_resource type="Environment" uid="uid://tsstcvnmnxuh" path="res://Levels/Env_Main.tres" id="2_5hky5"]
 [ext_resource type="Shader" path="res://Shaders/Shader_Ocean.gdshader" id="2_tb1jt"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_u1n2u"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_w78qw"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_a830g"]
 seamless = true
-noise = SubResource("FastNoiseLite_u1n2u")
+noise = SubResource("FastNoiseLite_w78qw")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_iofcg"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oufc2"]
 render_priority = 0
 shader = ExtResource("2_tb1jt")
 shader_parameter/base_color = Color(0, 0.53, 0.95, 1)
@@ -21,7 +21,7 @@ shader_parameter/normal_scale = 1.0
 shader_parameter/noise_tex = SubResource("NoiseTexture2D_a830g")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_fw3sl"]
-material = SubResource("ShaderMaterial_iofcg")
+material = SubResource("ShaderMaterial_oufc2")
 size = Vector2(200, 200)
 subdivide_width = 200
 subdivide_depth = 200
@@ -47,7 +47,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("PlaneMesh_fw3sl")
 
 [node name="DeathArea3D" type="Area3D" parent="WaterPlane"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -2.5, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WaterPlane/DeathArea3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0)

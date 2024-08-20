@@ -4,8 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://nnogmwxi85ku" path="res://Character/Mesh_Character.glb" id="2_osmc8"]
 [ext_resource type="Script" path="res://Scripts/Camera/CameraSpringArm.gd" id="4_eit5j"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_ul1pr"]
-size = Vector3(1, 2, 1)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kp06v"]
 
 [sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_gbrv3"]
 
@@ -142,7 +141,7 @@ script = ExtResource("1_c3mco")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("BoxShape3D_ul1pr")
+shape = SubResource("CapsuleShape3D_kp06v")
 
 [node name="Mesh" parent="." instance=ExtResource("2_osmc8")]
 unique_name_in_owner = true

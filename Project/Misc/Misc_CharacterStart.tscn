@@ -1,21 +1,31 @@
-[gd_scene load_steps=4 format=3 uid="uid://dx5vngxya1wbv"]
+[gd_scene load_steps=5 format=3 uid="uid://dx5vngxya1wbv"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_lvaka"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_begup"]
+albedo_color = Color(1, 0, 0, 1)
+
 [sub_resource type="QuadMesh" id="QuadMesh_8ocmn"]
+material = SubResource("StandardMaterial3D_begup")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2tv4m"]
 
 [node name="MiscCharacterStart" type="Node3D" groups=["character_start"]]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.0421067, 0, 0, 0, 1, 0, 0, 0, 0.0421067, 0, 1, 0)
-mesh = SubResource("CylinderMesh_lvaka")
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(0.0421067, 0, 0, 0, 1, 0, 0, 0, 0.0421067, 0, 0, 0)
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.713845, 0, 0, 0, 1, 0.505259, 1.61133, 0)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CylinderMesh_lvaka")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(23.7492, 0, 0, 0, 0.713845, 0, 0, 0, 23.7492, 11.9995, 1.61133, 0)
 mesh = SubResource("QuadMesh_8ocmn")
 skeleton = NodePath("../MeshInstance3D")
+
+[node name="Marker3D" type="Marker3D" parent="Node3D"]
 
 [node name="Area3D" type="Area3D" parent="."]
 
