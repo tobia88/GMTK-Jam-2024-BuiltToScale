@@ -3,4 +3,4 @@
 /android/
 *.afdesign~lock~
 *.blend1
-/Src/FLStudio/*/Backup/
+*/FLStudio/*/Backup/*

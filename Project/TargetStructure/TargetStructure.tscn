@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/TargetStructure/TargetStructure.gd" id="1_am54d"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wf26f"]
-size = Vector3(0.503052, 0.832031, 0.61499)
+size = Vector3(0.503052, 0.832031, 0.603394)
 
 [node name="TargetStructure" type="StaticBody3D" groups=["target_structure"]]
 script = ExtResource("1_am54d")
