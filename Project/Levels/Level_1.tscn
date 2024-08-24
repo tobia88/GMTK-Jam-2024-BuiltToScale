@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c6gl4hqrftpth"]
+[gd_scene load_steps=15 format=3 uid="uid://c6gl4hqrftpth"]
 
 [ext_resource type="PackedScene" uid="uid://cr4fkj12c17b0" path="res://Levels/Level_Base.tscn" id="1_rdyxg"]
 [ext_resource type="Environment" uid="uid://tsstcvnmnxuh" path="res://Levels/Env_Main.tres" id="2_refdc"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://gvw5cn72rlwq" path="res://TargetStructure/TargetStructure_Castle_1.tscn" id="5_4m14t"]
 [ext_resource type="PackedScene" uid="uid://dx5vngxya1wbv" path="res://Misc/Misc_CharacterStart.tscn" id="5_7exs0"]
 [ext_resource type="MeshLibrary" uid="uid://c3ijsktjtkbga" path="res://Environment/MeshLib_BlockTiles.tres" id="5_fte37"]
+[ext_resource type="PackedScene" uid="uid://vxsbx53o8se5" path="res://Misc/TutorialTrigger/Misc_TutorialTrigger.tscn" id="8_fj6ie"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_u1n2u"]
 
@@ -32,6 +33,9 @@ subdivide_depth = 200
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_glghn"]
 size = Vector3(100, 5, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l27ra"]
+size = Vector3(13.8845, 2.63947, 5.93774)
 
 [node name="Level_Base" instance=ExtResource("1_rdyxg")]
 
@@ -70,3 +74,13 @@ metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="TargetStructure" parent="." index="9" instance=ExtResource("5_4m14t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7845, 2, -22.9771)
+
+[node name="Misc_TutorialTrigger" parent="." index="10" instance=ExtResource("8_fj6ie")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.0668, 4, -24.1255)
+tutorial_text = "While in scaled mode, press space in mid-air to perform a Double Jump"
+
+[node name="CollisionShape3D" parent="Misc_TutorialTrigger/Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.49665, 0.819733, 1.953)
+shape = SubResource("BoxShape3D_l27ra")
+
+[editable path="Misc_TutorialTrigger"]
