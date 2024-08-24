@@ -22,8 +22,6 @@ func _ready() -> void:
 	parent_level = get_parent() as Level
 	assert(parent_level)
 	life_count = parent_level.max_lives
-	#parent_level.on_phase_state_changed.connect(_handle_on_phase_state_changed)
-	#parent_level.on_level_state_changed.connect(_handle_on_level_state_changed)
 	
 	
 func _process(delta: float) -> void:
@@ -44,18 +42,6 @@ func spawn_character() -> Character:
 	return new_character
 
 
-#func _handle_on_phase_state_changed(new_phase: Level.PhaseState) -> void:
-	#match(new_phase):
-		#Level.PhaseState.ROCK_AND_ROLL:
-			#_active_character = spawn_character()
-			#_update_camera()
-			#
-	#_update_ui()
-#
-#func _handle_on_level_state_changed(new_state: Level.LevelState) -> void:
-	#_update_ui()
-
-
 func _update_camera() -> void:
 	camera.current = true
 
@@ -69,3 +55,6 @@ func _update_ui() -> void:
 		parent_level.phase_state == Level.PhaseState.PLANNING
 
 	game_ui.control_level_cleared.visible = parent_level.level_state == Level.LevelState.LEVEL_CLEARED
+	
+	if parent_level.level_state != Level.LevelState.PLAYING:
+		game_ui.control_tutorial.visible = false

@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://vxsbx53o8se5"]
+
+[ext_resource type="PackedScene" uid="uid://blj5dy3hbymn0" path="res://Misc/TutorialTrigger/Mesh_TutorialTrigger.glb" id="1_trdtv"]
+[ext_resource type="Script" path="res://Scripts/Misc/TutorialTrigger.gd" id="1_vu5k3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yf2ws"]
+size = Vector3(2, 1, 2)
+
+[node name="Misc_TutorialTrigger" type="Node3D"]
+script = ExtResource("1_vu5k3")
+tutorial_text = "This is just an example 1!
+And example 2!"
+
+[node name="Mesh_TutorialSign" parent="." instance=ExtResource("1_trdtv")]
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.702382, 1.11707)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_yf2ws")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

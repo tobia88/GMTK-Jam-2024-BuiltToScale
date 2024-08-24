@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dmifyq7kxqkxs"]
+[gd_scene load_steps=6 format=3 uid="uid://dmifyq7kxqkxs"]
 
 [ext_resource type="Script" path="res://Scripts/UI/GameUI.gd" id="1_38s8g"]
+[ext_resource type="Script" path="res://Scripts/UI/UI_Tutorial.gd" id="2_iak5f"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_mlrs2"]
 font_size = 81
@@ -10,6 +11,11 @@ outline_color = Color(0.53, 0.2014, 0.2014, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_52bqy"]
 font_size = 30
+outline_size = 15
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_m7da8"]
+font_size = 35
 outline_size = 15
 outline_color = Color(0, 0, 0, 1)
 
@@ -24,6 +30,7 @@ script = ExtResource("1_38s8g")
 
 [node name="Control_LevelCleared" type="Control" parent="."]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -67,6 +74,7 @@ vertical_alignment = 1
 
 [node name="Control_Planning" type="Control" parent="."]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -86,5 +94,33 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Press Jump to Start the Game"
 label_settings = SubResource("LabelSettings_52bqy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control_Tutorial" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_iak5f")
+
+[node name="Label" type="Label" parent="Control_Tutorial"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -475.5
+offset_top = -73.0
+offset_right = 475.5
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "This is Tutorial Text, This is Tutorial Text, This is Tutorial Text, 
+This is Tutorial Text, This is Tutorial Text, This is Tutorial Text, "
+label_settings = SubResource("LabelSettings_m7da8")
 horizontal_alignment = 1
 vertical_alignment = 1

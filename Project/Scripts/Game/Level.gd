@@ -74,6 +74,17 @@ func on_character_interact_gimmick(character: Character, gimmick: Gimmick) -> vo
 		gimmick.is_operated = true
 	else:
 		gimmick.on_operate_failed()
+		
+		
+func on_character_enter_tutorial_trigger(character: Character, tutorial_trigger: TutorialTrigger) -> void:
+	if level_state == LevelState.PLAYING:
+		player_ctrl.game_ui.control_tutorial.text = tutorial_trigger.tutorial_text
+		player_ctrl.game_ui.control_tutorial.visible = true
+		
+
+func on_character_exit_tutorial_trigger(character: Character, tutorial_trigger: TutorialTrigger) -> void:
+	if level_state == LevelState.PLAYING:
+		player_ctrl.game_ui.control_tutorial.visible = false
 
 
 func _process_pending_states() -> void:

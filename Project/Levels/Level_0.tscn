@@ -1,10 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://bedcq5dqukwc1"]
+[gd_scene load_steps=10 format=3 uid="uid://bedcq5dqukwc1"]
 
 [ext_resource type="PackedScene" uid="uid://cr4fkj12c17b0" path="res://Levels/Level_Base.tscn" id="1_th5nm"]
 [ext_resource type="PackedScene" uid="uid://gvw5cn72rlwq" path="res://TargetStructure/TargetStructure_Castle_1.tscn" id="4_5an5h"]
 [ext_resource type="PackedScene" uid="uid://bhap26c2aki1h" path="res://Gimmicks/WindHole/Gimmick_Windhole.tscn" id="5_4vfso"]
 [ext_resource type="PackedScene" uid="uid://dx5vngxya1wbv" path="res://Misc/Misc_CharacterStart.tscn" id="5_oyw5a"]
+[ext_resource type="PackedScene" uid="uid://vxsbx53o8se5" path="res://Misc/TutorialTrigger/Misc_TutorialTrigger.tscn" id="6_hvh7i"]
 [ext_resource type="MeshLibrary" uid="uid://c3ijsktjtkbga" path="res://Environment/MeshLib_BlockTiles.tres" id="6_kbcmv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s56x4"]
+size = Vector3(14.7482, 3.98645, 5.84528)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oyiy2"]
+size = Vector3(7.83304, 2.69617, 8.00964)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j0jeu"]
+size = Vector3(5.02893, 1, 3.48682)
 
 [node name="Level_0" instance=ExtResource("1_th5nm")]
 
@@ -26,7 +36,44 @@ metadata/_editor_floor_ = Vector3(0, 0, 0)
 metadata/_edit_group_ = true
 
 [node name="TargetStructure" parent="." index="5" instance=ExtResource("4_5an5h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.78643, 1.17257, -8.72002)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.32, 4.02997, -9.76433)
 
 [node name="Gimmick_WindHole" parent="." index="6" instance=ExtResource("5_4vfso")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5781, 4, -10.0304)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.16416, 1.23184, -9.17779)
+
+[node name="Misc_TutorialTrigger2" parent="." index="7" instance=ExtResource("6_hvh7i")]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 0.0485964, 4.06944, 8.04627)
+tutorial_text = "Space to Jump"
+
+[node name="Area3D" parent="Misc_TutorialTrigger2" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.43488, 0.702382, 3.17548)
+
+[node name="CollisionShape3D" parent="Misc_TutorialTrigger2/Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.64291, 1.49323, -1.88151)
+shape = SubResource("BoxShape3D_s56x4")
+
+[node name="Misc_TutorialTrigger3" parent="." index="8" instance=ExtResource("6_hvh7i")]
+transform = Transform3D(-1, 0, -2.62268e-07, 0, 1, 0, 2.62268e-07, 0, -1, 14.9379, 4.06944, -8.18576)
+tutorial_text = "Scale up to destroy the castle"
+
+[node name="Area3D" parent="Misc_TutorialTrigger3" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.43488, 0.702382, 3.17548)
+
+[node name="CollisionShape3D" parent="Misc_TutorialTrigger3/Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.27886, 0.848083, -1.41118)
+shape = SubResource("BoxShape3D_oyiy2")
+
+[node name="Misc_TutorialTrigger" parent="." index="9" instance=ExtResource("6_hvh7i")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 10, 1, 16.9531)
+tutorial_text = "WASD to Move"
+
+[node name="Area3D" parent="Misc_TutorialTrigger" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.43488, 0.702382, -0.21027)
+
+[node name="CollisionShape3D" parent="Misc_TutorialTrigger/Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.437805, 0, -1.04882)
+shape = SubResource("BoxShape3D_j0jeu")
+
+[editable path="Misc_TutorialTrigger2"]
+[editable path="Misc_TutorialTrigger3"]
+[editable path="Misc_TutorialTrigger"]
