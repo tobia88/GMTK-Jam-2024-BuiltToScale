@@ -14,7 +14,7 @@ class JumpRequest:
 const move_speed := 5.0
 const airborne_move_speed_multiplier := 0.5
 const jump_height := 1.5
-const power_jump_height_multiplier := 2.5
+const power_jump_height_multiplier := 1.5
 
 @export var gravity_scale := 2.0
 
