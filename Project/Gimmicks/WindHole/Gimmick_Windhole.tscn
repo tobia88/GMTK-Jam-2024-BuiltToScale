@@ -63,6 +63,7 @@ void fragment() {
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4dhe6"]
+resource_local_to_scene = true
 render_priority = 0
 shader = SubResource("Shader_1fsw1")
 shader_parameter/albedo = Color(0, 1, 0.9, 1)

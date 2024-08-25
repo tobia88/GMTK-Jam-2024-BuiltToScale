@@ -3,9 +3,9 @@ extends Node
 var level_template_arr: Array[PackedScene] = [
 	preload("res://Levels/Level_0.tscn"),
 	preload("res://Levels/Level_1.tscn"),
+	preload("res://Levels/Level_1_1.tscn"),
 	preload("res://Levels/Level_2.tscn"),
 ]
-
 
 var _active_level: Level
 var active_level: Level:
